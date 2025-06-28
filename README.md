@@ -221,7 +221,7 @@ Granite berperan krusial dalam membangun fungsionalitas CRUD (Create, Read, Upda
 
 Granite berperan penting dalam meningkatkan desain visual dan _user experience_ aplikasi.
 
-- **Tata Letak _Checklist_ ala _Spreadsheet_:** AI membantu dalam transformasi tata letak dasar menjadi tampilan _checklist_ ala _spreadsheet_ yang modern dan rapi, lengkap dengan _header_ kolom yang sejajar (`CHECKLIST`, `LIST KEGIATAN`, `AKSI`). \* **Contoh Cuplikan Kode CSS (Anda bisa tempel di sini bagian `.column-headers` dan `.todo-item` Anda):**
+- **Tata Letak _Checklist_ ala _Spreadsheet_:** AI membantu dalam transformasi tata letak dasar menjadi tampilan _checklist_ ala _spreadsheet_ yang modern dan rapi, lengkap dengan _header_ kolom yang sejajar (`CHECKLIST`, `LIST KEGIATAN`, `AKSI`). **
   ```css
   column-headers {
     display: flex;
@@ -233,7 +233,7 @@ Granite berperan penting dalam meningkatkan desain visual dan _user experience_ 
     font-size: 1.1em;
   }
   ```
-
+  ```css
 .header-cell {
 padding: 5px 0;
 text-align: center; /
@@ -241,13 +241,15 @@ font-weight: bold;
 color: #555;
 box-sizing: border-box;
 }
-
+ ```
+ ```css
 .checklist {
 flex: 0 0 40px;
 text-align: center;
 padding: 5px 0;
 }
-
+ ```
+ ```css
 .list-activity {
 flex-grow: 1;
 font-weight: bold;
@@ -256,19 +258,22 @@ padding: 5px 10px;
 color: #555;
 font-size: 1em;
 }
-
+ ```
+ ```css
 .actions {
 flex: 0 0 120px;
 text-align: center;
 padding: 5px 10px;
 }
-
+ ```
+ ```css
 .todo-list {
 list-style-type: none;
 padding: 0;
 margin: 0;
 }
-
+ ```
+ ```css
 .todo-item {
 display: flex;
 align-items: center;
@@ -279,16 +284,19 @@ border-bottom: 1px solid #eee;
 transition: background-color 0.2s ease, box-shadow 0.2s ease;
 position: relative;
 }
-
+ ```
+ ```css
 .todo-item:last-child {
 border-bottom: none;
 }
-
+ ```
+ ```css
 .todo-item:hover {
 background-color: rgba(245, 245, 245, 0.7);
 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
-
+ ```
+ ```css
 .checkbox-container {
 flex: 0 0 40px;
 display: flex;
@@ -297,12 +305,14 @@ align-items: center;
 padding: 0 0;
 box-sizing: border-box;
 }
-
+ ```
+ ```css
 .checkbox-container input[type="checkbox"] {
 transform: scale(1.3);
 cursor: pointer;
 }
-
+```
+ ```css
 .task-text {
 flex-grow: 1;
 display: flex;
@@ -313,6 +323,8 @@ padding: 0 10px; /
 box-sizing: border-box;
 margin-left: 80px;
 }
+```
+ ```css
 
 .task-description {
 font-size: 1.15em;
@@ -323,6 +335,8 @@ margin-bottom: 2px;
 line-height: 1.2;
 text-align: center;
 }
+ ```
+ ```css
 /_ ..column-headers {
 display: flex;
 align-items: center;
@@ -331,7 +345,9 @@ background-color: #f9f9f9;
 padding: 10px 0px;
 margin-bottom: 5px;
 font-size: 1.1em;
-} _/
+}
+ ```
+ ```css
 /_ .todo-item {
 display: flex;
 align-items: center;
@@ -342,7 +358,9 @@ border-bottom: 1px solid #eee;
 /* background-color akan ditimpa oleh kelas prioritas */
 transition: background-color 0.2s ease, box-shadow 0.2s ease;
 position: relative;
-} _/
+}
+```
+ ```css
 /_ .checkbox-container {
 flex: 0 0 40px;
 display: flex;
@@ -350,7 +368,9 @@ justify-content: center;
 align-items: center;
 padding: 0 0;
 box-sizing: border-box;
-} _/
+}
+```
+```css
 /_ .task-text {
 flex-grow: 1;
 display: flex;
@@ -361,12 +381,15 @@ padding: 0 10px;
 box-sizing: border-box;
 margin-left: 80px;
 }
-} _/
+```
+```css
+} 
 /_ .actions {
 flex: 0 0 120px;
 text-align: center;
 padding: 5px 10px;
-} _/
+}
+```
 
 ```
 - **Styling Input & Tombol:** AI menyediakan _styling_ yang konsisten dan menarik untuk _input field_ (teks, tanggal, waktu, pilihan prioritas) dan tombol-tombol aksi, memastikan keselarasan visual dalam desain _flexbox_ yang responsif.
@@ -375,7 +398,7 @@ padding: 5px 10px;
 - **Desain Responsif Penuh:** Melalui _media query_ yang dihasilkan AI, aplikasi secara otomatis menyesuaikan tata letaknya untuk tampilan yang optimal di berbagai ukuran perangkat, dari _mobile_ hingga _desktop_.
 - **Mode Gelap:** AI menyediakan kode lengkap untuk fitur mode gelap, termasuk _toggle_ di UI dan penyimpanan preferensi pengguna di _local storage_.
 - **Animasi Halus:** Untuk meningkatkan interaktivitas, AI membantu menambahkan animasi _fade-out_ halus saat tugas dihapus, serta transisi mulus untuk perubahan UI seperti warna prioritas atau status penyelesaian.
-
+```
 ### 4. Debugging & Pemecahan Masalah
 
 Selama pengembangan, AI terbukti menjadi alat _debugging_ dan pemecah masalah yang sangat efektif. AI membantu mengidentifikasi dan menyediakan solusi untuk berbagai _error_ JavaScript (seperti `SyntaxError`, `ReferenceError: setFilter is not defined`, `TypeError: Cannot read properties of undefined`, masalah transisi `localStorage` ke Firestore) dan _error_ CSS (masalah _alignment_ Flexbox, duplikasi kode). Bantuan AI dalam diagnostik dan perbaikan ini menghemat waktu pengembangan yang signifikan.
