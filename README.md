@@ -233,7 +233,7 @@ Granite berperan penting dalam meningkatkan desain visual dan _user experience_ 
     font-size: 1.1em;
   }
   ```
-  ```css
+ ```css
 .header-cell {
 padding: 5px 0;
 text-align: center; /
@@ -353,9 +353,8 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 width: 100%;
-padding: 12px 0px; /* <<< DIUBAH: Padding horizontal di sini menjadi 0 */
+padding: 12px 0px; 
 border-bottom: 1px solid #eee;
-/* background-color akan ditimpa oleh kelas prioritas */
 transition: background-color 0.2s ease, box-shadow 0.2s ease;
 position: relative;
 }
