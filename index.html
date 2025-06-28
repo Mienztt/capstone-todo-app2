@@ -3,17 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My To-Do List</title>
+    <title>My To-Do App</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="app-header">My To-Do List</div>
-    <input type="text" id="task-input" placeholder="Add a new task..." />
-    <button id="add-task-btn">Add Task</button>
-    <ul id="todo-list"></ul>
+    <div class="app-container">
+      <div id="app-header">My To-Do List</div>
+      <button id="dark-mode-toggle">Mode Gelap</button>
+      <div class="add-task-section">
+        <input
+          type="text"
+          id="task-input"
+          placeholder="Tambahkan kegiatan..."
+        />
+        <input type="date" id="task-date" />
+        <input type="time" id="task-time" />
+        <select id="task-priority">
+          <option value="Medium" selected>Sedang</option>
+          <option value="High">Berat</option>
+          <option value="Low">Mudah</option>
+        </select>
+        <button id="add-task-btn">Add Task</button>
+      </div>
 
+      <div class="filter-options">
+        <button id="filter-all" class="filter-button">All</button>
+        <button id="filter-active" class="filter-button">Active</button>
+        <button id="filter-completed" class="filter-button">Completed</button>
+      </div>
+      <div class="column-headers">
+        <div class="header-cell checklist">CHECKLIST</div>
+        <div class="header-cell list-activity">LIST KEGIATAN</div>
+        <div class="header-cell actions">AKSI</div>
+      </div>
+
+      <ul id="todo-list" class="todo-list"></ul>
+      <ul id="todo-list" class="todo-list task-fade-in"></ul>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
     <script>
-      // JavaScript code for interactivity will go here
+      const firebaseConfig = {
+        apiKey: "AIzaSyBiplSVaiFASWcpTSQ7HlKCDUbDW_Bl3sc",
+        authDomain: "capstone-todo-app-sdi.firebaseapp.com",
+        projectId: "capstone-todo-app-sdi",
+        storageBucket: "capstone-todo-app-sdi.firebasestorage.app",
+        messagingSenderId: "40102128156",
+        appId: "1:40102128156:web:6970a3a2920bb1fbcb4dd9",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
     </script>
+    <script src="script.js"></script>
   </body>
 </html>

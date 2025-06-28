@@ -1,61 +1,631 @@
+/* --- Global & Layout Styling --- */
 body {
   font-family: "Arial", sans-serif;
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  /* justify-content: center; */ /* Opsional: jika ingin konten utama di tengah vertikal */
 }
 
-/* Header styling */
+/* Container utama untuk aplikasi */
+.app-container {
+  width: 90%;
+  max-width: 800px; /* Lebar maksimal untuk tampilan spreadsheet */
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  overflow: hidden; /* Penting untuk menjaga layout di dalam container */
+}
+
+/* --- Header Aplikasi (My To-Do List) Styling --- */
 #app-header {
   text-align: center;
-  font-size: 24px;
-  margin-top: 20px;
-  padding: 10px 0;
-  background-color: #333;
-  color: #fff;
+  font-size: 28px;
+  margin-bottom: 20px;
+  padding: 15px 0;
+  background-color: #f0f0f0;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  border-radius: 8px 8px 0 0;
 }
 
-/* Input field styling */
+/* --- Input & Button Styling (Add Task Section) --- */
+.add-task-section {
+  display: flex;
+  flex-wrap: wrap; /* Izinkan elemen wrap ke baris baru */
+  gap: 10px; /* Jarak antar elemen */
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
 #task-input {
-  width: 70%;
-  padding: 10px;
+  flex-grow: 1; /* Input teks mengambil ruang yang tersisa */
+  min-width: 180px; /* Lebar minimum agar tidak terlalu kecil */
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin: 10px 0;
+  font-size: 1.1em;
+  box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
 }
 
-/* Button styling */
+#task-date,
+#task-time,
+#task-priority {
+  flex-shrink: 0; /* Tidak menyusut terlalu banyak */
+  width: auto; /* Biarkan lebar otomatis sesuai konten */
+  min-width: 120px; /* Lebar minimum agar input tanggal/waktu terbaca */
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.1em;
+  box-sizing: border-box;
+}
+
+#task-date {
+  background-color: #f0f0f0;
+}
+
+#task-time {
+  background-color: #e0e0e0;
+}
+
+#task-priority {
+  background-color: #e0e0e0;
+}
+
+/* Styling untuk ikon date/time picker */
+#task-date::-webkit-calendar-picker-indicator,
+#task-time::-webkit-calendar-picker-indicator {
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
 #add-task-btn {
-  padding: 10px 20px;
+  flex-shrink: 0; /* Tidak menyusut terlalu banyak */
+  padding: 12px 25px;
   border: none;
-  background-color: #5cb85c;
+  background-color: #4caf50;
   color: white;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.3s ease;
 }
 
 #add-task-btn:hover {
-  background-color: #4cae4c; /* Slightly darker on hover */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  transform: scale(1.01); /* Slightly larger */
+  background-color: #45a049;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
-/* To-Do list item styling */
-.todo-item {
-  background-color: #fff;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 10px;
+/* --- Filter Options Styling --- */
+.filter-options {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.filter-options button {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.filter-options button:hover {
+  background-color: #f0f0f0;
+}
+
+.filter-options button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* --- Column Headers Styling --- */
+.column-headers {
+  display: flex;
   align-items: center;
+  border-bottom: 2px solid #ccc;
+  background-color: #f9f9f9;
+  padding: 10px 0px; /* <<< DIUBAH: Padding horizontal di sini menjadi 0 */
+  margin-bottom: 5px;
+  font-size: 1.1em;
+}
+
+.header-cell {
+  padding: 5px 0; /* Padding vertikal saja */
+  text-align: center; /* Default untuk header-cell */
+  font-weight: bold;
+  color: #555;
+  /* Tambahkan box-sizing untuk konsistensi */
+  box-sizing: border-box;
+}
+
+.checklist {
+  flex: 0 0 40px; /* Lebar kolom CHECKLIST */
+  text-align: center; /* Senter teks "CHECKLIST" */
+  /* Tambahkan padding horizontal agar konsisten dengan checkbox-container */
+  padding: 5px 0;
+}
+
+.list-activity {
+  flex-grow: 1;
+  font-weight: bold;
+  text-align: center; /* <<< DIUBAH: Senter teks "LIST KEGIATAN" */
+  padding: 5px 10px; /* Padding horizontal */
+  color: #555;
+  font-size: 1em;
+}
+
+.actions {
+  /* Gaya untuk header "AKSI" */
+  flex: 0 0 120px; /* Lebar kolom AKSI */
+  text-align: center; /* Senter teks "AKSI" */
+  /* Tambahkan padding horizontal agar konsisten dengan .action-buttons */
+  padding: 5px 10px; /* <<< DIUBAH: Padding horizontal */
+}
+
+/* --- To-Do List Container Styling --- */
+.todo-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* --- To-Do List Item Styling (LI) --- */
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 0px; /* <<< DIUBAH: Padding horizontal di sini menjadi 0 */
+  border-bottom: 1px solid #eee;
+  /* background-color akan ditimpa oleh kelas prioritas */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
 }
 
 .todo-item:hover {
-  background-color: #f9f9f9; /* Lighter background on hover */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  transform: scale(1.01); /* Slightly larger */
-  transition: all 0.2s ease-in-out; /* Smooth transition */
+  background-color: rgba(245, 245, 245, 0.7);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Checkbox Column Styling --- */
+.checkbox-container {
+  flex: 0 0 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0;
+  box-sizing: border-box;
+}
+
+.checkbox-container input[type="checkbox"] {
+  transform: scale(1.3);
+  cursor: pointer;
+}
+
+.task-text {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+  margin-left: 80px;
+}
+/* --- Styling untuk Teks Tugas Utama --- */
+.task-description {
+  font-size: 1.15em;
+  font-weight: bold;
+  color: #333;
+  display: block; /* Agar tanggal/waktu di bawahnya */
+  margin-bottom: 2px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* --- Styling untuk Container Hari, Tanggal, Waktu --- */
+.task-datetime-container {
+  display: flex;
+  font-size: 0.8em;
+  color: #666;
+  gap: 5px;
+  flex-wrap: wrap;
+  line-height: 1.2;
+  justify-content: center; /* <<< Opsional: Senter item flex di dalamnya */
+}
+
+/* Styling individu untuk Hari, Tanggal, Waktu jika perlu */
+.task-day {
+  font-weight: bold;
+  color: #444;
+}
+
+.task-date {
+  /* Gaya spesifik untuk tanggal */
+}
+
+.task-time {
+  /* Gaya spesifik untuk waktu */
+}
+
+/* --- Action Buttons Styling (Edit/Delete) --- */
+.action-buttons {
+  flex: 0 0 120px; /* Lebar kolom action buttons, cocok dengan header actions */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Senter tombol di kolomnya */
+  gap: 8px;
+  padding: 0 10px; /* <<< DIUBAH: Padding horizontal agar konsisten dengan header Aksi */
+  box-sizing: border-box;
+}
+
+.edit-button,
+.delete-button {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  color: #555;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.delete-button:hover {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+/* --- Styling for input when editing --- */
+.todo-item input[type="text"] {
+  flex-grow: 1;
+  padding: 5px;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  margin-right: 15px;
+  font-size: 1.15em;
+}
+
+/* --- Styling for completed tasks --- */
+.completed {
+  text-decoration: line-through;
+  color: #888;
+  font-weight: normal;
+}
+
+.todo-item.task-completed-visual {
+  background-color: #f0f0f0;
+  opacity: 0.7;
+  border-color: #ddd;
+}
+
+.todo-item input[type="checkbox"]:checked + .task-text .task-description {
+  text-decoration: line-through;
+  color: #a0a0a0;
+}
+
+/* --- Styling untuk Background Warna Prioritas pada Seluruh Item (LI) --- */
+.priority-bg-high {
+  background-color: #ffe6e6; /* Merah muda sangat terang */
+}
+
+.priority-bg-medium {
+  background-color: #fff9e6; /* Kuning muda sangat terang */
+}
+
+.priority-bg-low {
+  background-color: #e6ffe6; /* Hijau muda sangat terang */
+}
+
+/* Sesuaikan hover effect agar tetap terlihat bagus di atas warna prioritas */
+.todo-item.priority-bg-high:hover,
+.todo-item.priority-bg-medium:hover,
+.todo-item.priority-bg-low:hover {
+  background-color: rgba(245, 245, 245, 0.7);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Responsive Design (Media Queries) --- */
+
+/* Mobile Devices (max-width: 600px) */
+@media (max-width: 600px) {
+  .app-container {
+    max-width: 98%;
+    padding: 10px;
+  }
+
+  /* Add Task Section - Stack vertically */
+  .add-task-section {
+    flex-direction: column;
+    gap: 8px;
+  }
+  #task-input,
+  #task-date,
+  #task-time,
+  #task-priority,
+  #add-task-btn {
+    width: 100%;
+    margin-right: 0;
+    min-width: unset;
+  }
+  #add-task-btn {
+    margin-top: 5px;
+  }
+
+  /* Filters - Stack or adjust */
+  .filter-options {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .filter-options button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+
+  /* Column Headers & To-Do Items - Adjust padding and font size */
+  .column-headers,
+  .todo-item {
+    padding: 8px 10px;
+    font-size: 0.9em;
+  }
+  .header-cell,
+  .task-description,
+  .task-datetime-container,
+  .edit-button,
+  .delete-button {
+    font-size: 0.85em;
+  }
+
+  .checklist {
+    flex: 0 0 30px;
+  }
+  .list-activity {
+    padding: 0 5px;
+  }
+  .actions {
+    flex: 0 0 100px;
+  }
+  .edit-button,
+  .delete-button {
+    padding: 4px 8px;
+  }
+}
+
+/* Tablet Devices (min-width: 601px and max-width: 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+  .app-container {
+    max-width: 95%;
+  }
+  .add-task-section {
+    gap: 12px;
+  }
+  #task-input,
+  #task-date,
+  #task-time,
+  #task-priority {
+    min-width: 120px;
+  }
+  .column-headers,
+  .todo-item {
+    padding: 10px 15px;
+  }
+  .task-description,
+  .task-datetime-container {
+    font-size: 0.95em;
+  }
+}
+/* --- Styling Tombol Dark Mode --- */
+#dark-mode-toggle {
+  background-color: #666;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  position: absolute; /* Posisikan absolut di dalam header */
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  transition: background-color 0.3s ease;
+}
+
+#dark-mode-toggle:hover {
+  background-color: #888;
+}
+
+/* --- Dark Mode Styles --- */
+body.dark-mode {
+  background-color: #222; /* Background gelap utama */
+  color: #e0e0e0; /* Warna teks terang */
+}
+
+.app-container.dark-mode {
+  background-color: #333; /* Background container lebih gelap */
+  border-color: #444;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Bayangan gelap */
+}
+
+#app-header.dark-mode {
+  background-color: #444;
+  color: #f0f0f0;
+  border-bottom-color: #555;
+}
+
+/* Input fields in dark mode */
+.dark-mode #task-input,
+.dark-mode #task-date,
+.dark-mode #task-time,
+.dark-mode #task-priority {
+  background-color: #3a3a3a;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+.dark-mode #task-date::-webkit-calendar-picker-indicator,
+.dark-mode #task-time::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Invert warna ikon picker agar terlihat di dark mode */
+}
+
+/* Filter buttons in dark mode */
+.dark-mode .filter-options button {
+  background-color: #555;
+  color: #e0e0e0;
+  border-color: #666;
+}
+
+.dark-mode .filter-options button:hover {
+  background-color: #666;
+}
+
+.dark-mode .filter-options button.active {
+  background-color: #007bff; /* Bisa tetap biru atau disesuaikan */
+  color: white;
+  border-color: #007bff;
+}
+
+/* Column headers in dark mode */
+.dark-mode .column-headers {
+  background-color: #444;
+  border-bottom-color: #555;
+  color: #f0f0f0;
+}
+
+/* To-Do list items in dark mode */
+.dark-mode .todo-item {
+  background-color: #3a3a3a;
+  border-bottom-color: #555;
+  color: #f0f0f0;
+}
+
+.dark-mode .todo-item:hover {
+  background-color: rgba(60, 60, 60, 0.7); /* Hover di dark mode */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Task text and details in dark mode */
+.dark-mode .task-description {
+  color: #f0f0f0;
+}
+.dark-mode .task-datetime-container {
+  color: #bbb;
+}
+.dark-mode .task-day {
+  color: #ccc;
+}
+
+/* Action buttons in dark mode */
+.dark-mode .edit-button,
+.dark-mode .delete-button {
+  background-color: #555;
+  color: #e0e0e0;
+  border-color: #666;
+}
+.dark-mode .edit-button:hover {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+.dark-mode .delete-button:hover {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+/* Completed tasks in dark mode */
+.dark-mode .completed {
+  color: #aaa;
+}
+.dark-mode
+  .todo-item
+  input[type="checkbox"]:checked
+  + .task-text
+  .task-description {
+  color: #888; /* Warna coretan lebih gelap di dark mode */
+}
+
+/* Priority Background Colors in Dark Mode (PENTING: Sesuaikan agar terlihat di latar gelap) */
+.dark-mode .priority-bg-high {
+  background-color: #8b0000; /* Merah gelap */
+}
+.dark-mode .priority-bg-medium {
+  background-color: #ff8c00; /* Oranye gelap */
+}
+.dark-mode .priority-bg-low {
+  background-color: #2e8b57; /* Hijau gelap */
+}
+
+/* Tambahan: Pastikan header #app-header memiliki position: relative; agar tombol di dalamnya bisa di-absolute */
+#app-header {
+  /* ... gaya yang sudah ada ... */
+  position: relative; /* Tambahkan ini agar tombol dark mode bisa di-absolute */
+}
+* CSS for transitions and animations */
+
+/* General transition properties for all todo-items */
+li.todo-item {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Task fade-in class */
+.task-fade-in {
+  animation: fade-in 0.3s ease;
+}
+
+/* Keyframes for fade-out animation */
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Task fade-out class */
+.task-fade-out {
+  animation: fade-out 0.3s ease;
 }
