@@ -1,23 +1,21 @@
-// --- BAGIAN ATAS: GET REFERENCES, GLOBAL VARS ---
 
-// Get references to HTML elements
 const inputField = document.getElementById("task-input");
 const addButton = document.getElementById("add-task-btn");
 const todoList = document.getElementById("todo-list");
 const taskDateInput = document.getElementById("task-date");
-const taskTimeInput = document.getElementById("task-time"); // Perbaiki typo jika ada (document = document.)
+const taskTimeInput = document.getElementById("task-time"); 
 const taskPriorityInput = document.getElementById("task-priority");
 const filterAllBtn = document.getElementById("filter-all");
 const filterActiveBtn = document.getElementById("filter-active");
 const filterCompletedBtn = document.getElementById("filter-completed");
 const darkModeToggleBtn = document.getElementById("dark-mode-toggle");
 
-// Global variables
-let todos = []; // <<< Data todos sekarang akan diisi dari Firestore
-let currentFilter = "all"; // Default filter state
-let darkModeEnabled = false; // Untuk dark mode
 
-// --- HELPER FUNCTIONS ---
+let todos = []; 
+let currentFilter = "all"; 
+let darkModeEnabled = false; 
+
+
 
 // Helper function to get day of the week in Indonesian
 function getDayOfWeek(dateString) {
@@ -34,7 +32,7 @@ function getDayOfWeek(dateString) {
   return daysOfTheWeek[date.getDay()];
 }
 
-// Function to set default value for date and time inputs
+
 function setDefaultDateTimeInputs() {
   const now = new Date();
   const year = now.getFullYear();
@@ -180,13 +178,13 @@ function editTodo(todoIdToEdit, currentText) {
 
 // Function to delete a task (MODIFIED FOR FIRESTORE)
 function deleteTodo(todoIdToDelete) {
-  // Menerima ID Firestore
+  
   const todoItemElement = document.querySelector(
     `li.todo-item[data-id="${todoIdToDelete}"]`
   );
 
   if (todoItemElement) {
-    todoItemElement.classList.add("task-fade-out"); // Terapkan fade-out
+    todoItemElement.classList.add("task-fade-out"); 
 
     setTimeout(() => {
       db.collection("todos")
@@ -194,9 +192,9 @@ function deleteTodo(todoIdToDelete) {
         .delete()
         .then(() => console.log("Task deleted from Firestore successfully!"))
         .catch((error) => console.error("Error deleting task:", error));
-    }, 300); // Durasi delay harus cocok dengan durasi animasi CSS
+    }, 300); 
   } else {
-    // Fallback jika elemen tidak ditemukan di DOM, langsung hapus dari Firestore
+
     db.collection("todos")
       .doc(todoIdToDelete)
       .delete()
@@ -207,7 +205,7 @@ function deleteTodo(todoIdToDelete) {
   }
 }
 
-// Function to display todos in UI (ini adalah fungsi displayTodos Anda yang sudah lengkap dan sekarang dipicu Firestore)
+
 function displayTodos() {
   const filteredTodos = todos.filter((todo) => {
     if (currentFilter === "all") {
@@ -227,7 +225,7 @@ function displayTodos() {
   filteredTodos.forEach((todo) => {
     const li = document.createElement("li");
     li.classList.add("todo-item");
-    li.dataset.id = todo.id; // <<< PENTING: Menggunakan ID Firestore
+    li.dataset.id = todo.id;
 
     // Tambahkan kelas prioritas background
     if (todo.priority === "High") {
@@ -238,19 +236,18 @@ function displayTodos() {
       li.classList.add("priority-bg-low");
     }
 
-    // Tambahan untuk efek visual pada seluruh baris saat completed
+    
     if (todo.completed) {
       li.classList.add("task-completed-visual");
     }
 
-    // Checkbox container
     const checkboxContainer = document.createElement("div");
     checkboxContainer.classList.add("checkbox-container");
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = todo.completed;
     checkbox.addEventListener("change", () => {
-      // Update completed status di Firestore
+  
       db.collection("todos")
         .doc(todo.id)
         .update({ completed: checkbox.checked })
@@ -353,4 +350,4 @@ darkModeToggleBtn.addEventListener("click", toggleDarkMode);
 // Panggilan awal untuk setup aplikasi
 applyInitialDarkMode();
 setDefaultDateTimeInputs();
-setFilter("all"); // Panggil ini untuk set filter 'all' secara default dan tampilkan tugas
+setFilter("all"); 
