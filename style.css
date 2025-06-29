@@ -1,4 +1,4 @@
-
+/* --- Global & Layout Styling --- */
 body {
   font-family: "Arial", sans-serif;
   background-color: #f4f4f4;
@@ -8,13 +8,12 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  
 }
 
-
+/* Container utama untuk aplikasi */
 .app-container {
   width: 90%;
-  max-width: 800px;
+  max-width: 800px; /* Lebar maksimal untuk tampilan spreadsheet */
   background-color: white;
   padding: 20px;
   border-radius: 8px;
@@ -22,10 +21,10 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 1px solid #ddd;
-  overflow: hidden; 
+  overflow: hidden; /* Penting untuk menjaga layout di dalam container */
 }
 
-
+/* --- Header Aplikasi (My To-Do List) Styling --- */
 #app-header {
   text-align: center;
   font-size: 28px;
@@ -37,32 +36,32 @@ body {
   border-radius: 8px 8px 0 0;
 }
 
-
+/* --- Input & Button Styling (Add Task Section) --- */
 .add-task-section {
   display: flex;
-  flex-wrap: wrap; 
-  gap: 10px;
+  flex-wrap: wrap; /* Izinkan elemen wrap ke baris baru */
+  gap: 10px; /* Jarak antar elemen */
   margin-bottom: 20px;
   padding: 10px 0;
   border-bottom: 1px solid #eee;
 }
 
 #task-input {
-  flex-grow: 1; 
-  min-width: 180px; 
+  flex-grow: 1; /* Input teks mengambil ruang yang tersisa */
+  min-width: 180px; /* Lebar minimum agar tidak terlalu kecil */
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1.1em;
-  box-sizing: border-box; 
+  box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
 }
 
 #task-date,
 #task-time,
 #task-priority {
-  flex-shrink: 0; 
-  width: auto; 
-  min-width: 120px; 
+  flex-shrink: 0; /* Tidak menyusut terlalu banyak */
+  width: auto; /* Biarkan lebar otomatis sesuai konten */
+  min-width: 120px; /* Lebar minimum agar input tanggal/waktu terbaca */
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -82,7 +81,7 @@ body {
   background-color: #e0e0e0;
 }
 
-
+/* Styling untuk ikon date/time picker */
 #task-date::-webkit-calendar-picker-indicator,
 #task-time::-webkit-calendar-picker-indicator {
   font-size: 1.2em;
@@ -90,7 +89,7 @@ body {
 }
 
 #add-task-btn {
-  flex-shrink: 0; 
+  flex-shrink: 0; /* Tidak menyusut terlalu banyak */
   padding: 12px 25px;
   border: none;
   background-color: #4caf50;
@@ -108,7 +107,7 @@ body {
   transform: translateY(-2px);
 }
 
-
+/* --- Filter Options Styling --- */
 .filter-options {
   display: flex;
   justify-content: center;
@@ -138,62 +137,66 @@ body {
   border-color: #007bff;
 }
 
-
+/* --- Column Headers Styling --- */
 .column-headers {
   display: flex;
   align-items: center;
   border-bottom: 2px solid #ccc;
   background-color: #f9f9f9;
-  padding: 10px 0px; 
+  padding: 10px 0px; /* <<< DIUBAH: Padding horizontal di sini menjadi 0 */
   margin-bottom: 5px;
   font-size: 1.1em;
 }
 
 .header-cell {
-  padding: 5px 0; 
-  text-align: center; 
+  padding: 5px 0; /* Padding vertikal saja */
+  text-align: center; /* Default untuk header-cell */
   font-weight: bold;
   color: #555;
+  /* Tambahkan box-sizing untuk konsistensi */
   box-sizing: border-box;
 }
 
 .checklist {
-  flex: 0 0 40px;
-  text-align: center; 
+  flex: 0 0 40px; /* Lebar kolom CHECKLIST */
+  text-align: center; /* Senter teks "CHECKLIST" */
+  /* Tambahkan padding horizontal agar konsisten dengan checkbox-container */
   padding: 5px 0;
 }
 
 .list-activity {
   flex-grow: 1;
   font-weight: bold;
-  text-align: center; 
-  padding: 5px 10px; 
+  text-align: center; /* <<< DIUBAH: Senter teks "LIST KEGIATAN" */
+  padding: 5px 10px; /* Padding horizontal */
   color: #555;
   font-size: 1em;
 }
 
 .actions {
-  
-  flex: 0 0 120px; 
-  text-align: center; 
-  padding: 5px 10px; 
+  /* Gaya untuk header "AKSI" */
+  flex: 0 0 120px; /* Lebar kolom AKSI */
+  text-align: center; /* Senter teks "AKSI" */
+  /* Tambahkan padding horizontal agar konsisten dengan .action-buttons */
+  padding: 5px 10px; /* <<< DIUBAH: Padding horizontal */
 }
 
-
+/* --- To-Do List Container Styling --- */
 .todo-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-
+/* --- To-Do List Item Styling (LI) --- */
 .todo-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 12px 0px; 
+  padding: 12px 0px; /* <<< DIUBAH: Padding horizontal di sini menjadi 0 */
   border-bottom: 1px solid #eee;
+  /* background-color akan ditimpa oleh kelas prioritas */
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
   position: relative;
 }
@@ -207,7 +210,7 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
-
+/* --- Checkbox Column Styling --- */
 .checkbox-container {
   flex: 0 0 40px;
   display: flex;
@@ -232,16 +235,18 @@ body {
   box-sizing: border-box;
   margin-left: 80px;
 }
+/* --- Styling untuk Teks Tugas Utama --- */
 .task-description {
   font-size: 1.15em;
   font-weight: bold;
   color: #333;
-  display: block;
+  display: block; /* Agar tanggal/waktu di bawahnya */
   margin-bottom: 2px;
   line-height: 1.2;
   text-align: center;
 }
 
+/* --- Styling untuk Container Hari, Tanggal, Waktu --- */
 .task-datetime-container {
   display: flex;
   font-size: 0.8em;
@@ -249,30 +254,31 @@ body {
   gap: 5px;
   flex-wrap: wrap;
   line-height: 1.2;
-  justify-content: center;
+  justify-content: center; /* <<< Opsional: Senter item flex di dalamnya */
 }
 
-
+/* Styling individu untuk Hari, Tanggal, Waktu jika perlu */
 .task-day {
   font-weight: bold;
   color: #444;
 }
 
 .task-date {
-
+  /* Gaya spesifik untuk tanggal */
 }
 
 .task-time {
+  /* Gaya spesifik untuk waktu */
 }
 
-
+/* --- Action Buttons Styling (Edit/Delete) --- */
 .action-buttons {
-  flex: 0 0 120px; 
+  flex: 0 0 120px; /* Lebar kolom action buttons, cocok dengan header actions */
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center; /* Senter tombol di kolomnya */
   gap: 8px;
-  padding: 0 10px; 
+  padding: 0 10px; /* <<< DIUBAH: Padding horizontal agar konsisten dengan header Aksi */
   box-sizing: border-box;
 }
 
@@ -301,7 +307,7 @@ body {
   border-color: #dc3545;
 }
 
-
+/* --- Styling for input when editing --- */
 .todo-item input[type="text"] {
   flex-grow: 1;
   padding: 5px;
@@ -311,7 +317,7 @@ body {
   font-size: 1.15em;
 }
 
-
+/* --- Styling for completed tasks --- */
 .completed {
   text-decoration: line-through;
   color: #888;
@@ -329,19 +335,20 @@ body {
   color: #a0a0a0;
 }
 
-
+/* --- Styling untuk Background Warna Prioritas pada Seluruh Item (LI) --- */
 .priority-bg-high {
-  background-color: #ffe6e6; 
+  background-color: #ffe6e6; /* Merah muda sangat terang */
 }
 
 .priority-bg-medium {
-  background-color: #fff9e6;
+  background-color: #fff9e6; /* Kuning muda sangat terang */
 }
 
 .priority-bg-low {
-  background-color: #e6ffe6;
+  background-color: #e6ffe6; /* Hijau muda sangat terang */
+}
 
-
+/* Sesuaikan hover effect agar tetap terlihat bagus di atas warna prioritas */
 .todo-item.priority-bg-high:hover,
 .todo-item.priority-bg-medium:hover,
 .todo-item.priority-bg-low:hover {
@@ -349,16 +356,16 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
+/* --- Responsive Design (Media Queries) --- */
 
-
-
+/* Mobile Devices (max-width: 600px) */
 @media (max-width: 600px) {
   .app-container {
     max-width: 98%;
     padding: 10px;
   }
 
-  
+  /* Add Task Section - Stack vertically */
   .add-task-section {
     flex-direction: column;
     gap: 8px;
@@ -376,7 +383,7 @@ body {
     margin-top: 5px;
   }
 
-
+  /* Filters - Stack or adjust */
   .filter-options {
     flex-wrap: wrap;
     gap: 5px;
@@ -386,7 +393,7 @@ body {
     font-size: 0.9em;
   }
 
-
+  /* Column Headers & To-Do Items - Adjust padding and font size */
   .column-headers,
   .todo-item {
     padding: 8px 10px;
@@ -415,7 +422,7 @@ body {
   }
 }
 
-
+/* Tablet Devices (min-width: 601px and max-width: 900px) */
 @media (min-width: 601px) and (max-width: 900px) {
   .app-container {
     max-width: 95%;
@@ -438,7 +445,7 @@ body {
     font-size: 0.95em;
   }
 }
-
+/* --- Styling Tombol Dark Mode --- */
 #dark-mode-toggle {
   background-color: #666;
   color: white;
@@ -447,7 +454,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   font-size: 0.9em;
-  position: absolute; 
+  position: absolute; /* Posisikan absolut di dalam header */
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
@@ -458,16 +465,16 @@ body {
   background-color: #888;
 }
 
-
+/* --- Dark Mode Styles --- */
 body.dark-mode {
-  background-color: #222; //
-  color: #e0e0e0; 
+  background-color: #222; /* Background gelap utama */
+  color: #e0e0e0; /* Warna teks terang */
 }
 
 .app-container.dark-mode {
-  background-color: #333; 
+  background-color: #333; /* Background container lebih gelap */
   border-color: #444;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Bayangan gelap */
 }
 
 #app-header.dark-mode {
@@ -476,7 +483,7 @@ body.dark-mode {
   border-bottom-color: #555;
 }
 
-
+/* Input fields in dark mode */
 .dark-mode #task-input,
 .dark-mode #task-date,
 .dark-mode #task-time,
@@ -488,10 +495,10 @@ body.dark-mode {
 
 .dark-mode #task-date::-webkit-calendar-picker-indicator,
 .dark-mode #task-time::-webkit-calendar-picker-indicator {
-  filter: invert(1); 
+  filter: invert(1); /* Invert warna ikon picker agar terlihat di dark mode */
 }
 
-
+/* Filter buttons in dark mode */
 .dark-mode .filter-options button {
   background-color: #555;
   color: #e0e0e0;
@@ -503,19 +510,19 @@ body.dark-mode {
 }
 
 .dark-mode .filter-options button.active {
-  background-color: #007bff; 
+  background-color: #007bff; /* Bisa tetap biru atau disesuaikan */
   color: white;
   border-color: #007bff;
 }
 
-
+/* Column headers in dark mode */
 .dark-mode .column-headers {
   background-color: #444;
   border-bottom-color: #555;
   color: #f0f0f0;
 }
 
-
+/* To-Do list items in dark mode */
 .dark-mode .todo-item {
   background-color: #3a3a3a;
   border-bottom-color: #555;
@@ -523,11 +530,11 @@ body.dark-mode {
 }
 
 .dark-mode .todo-item:hover {
-  background-color: rgba(60, 60, 60, 0.7); 
+  background-color: rgba(60, 60, 60, 0.7); /* Hover di dark mode */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-
+/* Task text and details in dark mode */
 .dark-mode .task-description {
   color: #f0f0f0;
 }
@@ -538,7 +545,7 @@ body.dark-mode {
   color: #ccc;
 }
 
-
+/* Action buttons in dark mode */
 .dark-mode .edit-button,
 .dark-mode .delete-button {
   background-color: #555;
@@ -556,7 +563,7 @@ body.dark-mode {
   border-color: #dc3545;
 }
 
-
+/* Completed tasks in dark mode */
 .dark-mode .completed {
   color: #aaa;
 }
@@ -565,33 +572,34 @@ body.dark-mode {
   input[type="checkbox"]:checked
   + .task-text
   .task-description {
-  color: #888;/
+  color: #888; /* Warna coretan lebih gelap di dark mode */
 }
 
-
+/* Priority Background Colors in Dark Mode (PENTING: Sesuaikan agar terlihat di latar gelap) */
 .dark-mode .priority-bg-high {
-  background-color: #8b0000; 
+  background-color: #8b0000; /* Merah gelap */
 }
 .dark-mode .priority-bg-medium {
-  background-color: #ff8c00; 
+  background-color: #ff8c00; /* Oranye gelap */
 }
 .dark-mode .priority-bg-low {
-  background-color: #2e8b57; 
+  background-color: #2e8b57; /* Hijau gelap */
 }
 
-
+/* Tambahan: Pastikan header #app-header memiliki position: relative; agar tombol di dalamnya bisa di-absolute */
 #app-header {
-
-  position: relative; 
+  /* ... gaya yang sudah ada ... */
+  position: relative; /* Tambahkan ini agar tombol dark mode bisa di-absolute */
+}
 * CSS for transitions and animations */
 
-
+/* General transition properties for all todo-items */
 li.todo-item {
   transition: background-color 0.3s ease, box-shadow 0.3s ease,
     transform 0.3s ease, opacity 0.3s ease;
 }
 
-
+/* Keyframes for fade-in animation */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -601,12 +609,12 @@ li.todo-item {
   }
 }
 
-
+/* Task fade-in class */
 .task-fade-in {
   animation: fade-in 0.3s ease;
 }
 
-
+/* Keyframes for fade-out animation */
 @keyframes fade-out {
   from {
     opacity: 1;
@@ -616,6 +624,7 @@ li.todo-item {
   }
 }
 
-/* Task fade-out class */.task-fade-out {
+/* Task fade-out class */
+.task-fade-out {
   animation: fade-out 0.3s ease;
 }
